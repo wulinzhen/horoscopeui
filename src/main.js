@@ -3,8 +3,28 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import axios from 'axios'
+
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../node_modules/bootstrap/dist/js/bootstrap.min.js'
+
+import JDatePicker from 'vue-jlunar-datepicker';
+import DatePicker from 'vue2-datepicker'
+
+Vue.component("j-date-picker",JDatePicker);
+Vue.component("date-picker",DatePicker);
 
 Vue.config.productionTip = false
+
+Vue.prototype.$ajax = axios
+axios.defaults.baseURL = process.env.BASE_API;
+
+axios.all('*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type");
+  res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+  next();
+});
 
 /* eslint-disable no-new */
 new Vue({

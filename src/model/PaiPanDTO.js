@@ -1,24 +1,20 @@
-class PaiPanDTO {
+import BirthPlaceDTO from '../model/BirthPlaceDTO'
+export default class  PaiPanDTO {
+  constructor(){
+    this.birthPlace = new BirthPlaceDTO();
+  }
   // 姓名
-  name:string;
+  name;
   // 性别 1-男 2女
-  sex:number;
+  sex;
   // 出生时间-阳历
-  birthDateTime:string;
+  birthDateTime;
   /**
    * 出生时间是阴历还是阳历
    * 1-阳历
    * 2-阴历
    */
-  sunOrlun:number;
+  sunOrlun;
   //出生地
-  birthPlace:BirthPlaceDTO;
-  constructor(){
-
-  }
-
-  // 方法
-  disp():void {
-    console.log("PaiPanDTO :   "+this)
-  }
+  birthPlace;
 }

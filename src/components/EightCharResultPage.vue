@@ -1,100 +1,56 @@
-<template xmlns:v-on="http://www.w3.org/1999/xhtml">
+<template>
   <div class="container-fluid ">
     <form class="form-horizontal" role="form">
       <div class="form-group ">
-        <span class="col-md-2 control-label" id="basic-addon1">   姓名  </span>
-        <div class="col-md-4">
-          <input class="form-control" type="text" placeholder="姓名" aria-describedby="basic-addon1"
-                 v-model="paiPanDTO.name">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <span class="col-md-2 control-label" id="basic-addon2">性别</span>
-        <div class="col-md-4">
-          <label class="radio-inline">
-            <input type="radio" value="1" name="sex" v-model="paiPanDTO.sex">男性
-          </label>
-          <label class="radio-inline">
-            <input type="radio" value="2" name="sex" v-model="paiPanDTO.sex">女性
-          </label>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <span class="col-md-2 control-label">出生时间</span>
-        <div class="col-md-4">
-          <date-picker width="100%" height="100%" v-model="paiPanDTO.birthDateTime"
-                       :format="datePicker.format"
-                       :confirm="datePicker.confirm" confirm-text="确定" :clearable="datePicker.clearable" type="datetime"
-                       placeholder="请选择出生时间" input-class="form-control" value-type="format"
-                       default-value="1981-01-01 12:00"
-          ></date-picker>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <span class="col-md-2 control-label" id="basic-addon4">出生地</span>
-        <div class="col-md-4">
-          <div class="col-md-4">
-            <select id="selProvince" changeFor="selCity" class="form-control"
-                    v-model="paiPanDTO.birthPlace.province"
-                    @change="selectRegionInfo($event)">
-              <option value="" selected>请选择省</option>
-              <option v-for="(x,i) of provinceList" :value="x.criCode">{{x.criName}}</option>
-            </select>
+        <strong>
+          <span class="col-md-1 control-label" id="basic-addon1">姓名:</span>
+          <div class="col-md-3">
+            <span class="col-md-3 control-label">{{ paiPanRunDTO.paipanDTO.name }}</span>
           </div>
-          <div class="col-md-4">
-            <select id="selCity" changeFor="selArea" class="form-control"
-                    v-model="paiPanDTO.birthPlace.city"
-                    @change="selectRegionInfo($event)">
-              <option value="" selected>请选择市</option>
-              <option v-for="(x,i) of cityList" :value="x.criCode">{{x.criName}}</option>
-            </select>
-          </div>
-          <div class="col-md-4">
-            <select id="selArea" class="form-control" v-model="paiPanDTO.birthPlace.area">
-              <option value="" selected>请选择区县</option>
-              <option v-for="(x,i) of areaList" :value="x.criCode">{{x.criName}}</option>
-            </select>
-          </div>
-        </div>
+        </strong>
       </div>
-
-      <div class="form-group">
-        <div class="col-md-1 col-md-offset-3 ">
-          <button class=" btn btn-success btn-block" type="submit" v-on:click="paiPan">提交</button>
-        </div>
+      <div class="form-group ">
+        <strong>
+          <span class="col-md-1 control-label">性别:</span>
+          <div class="col-md-3">
+            <span class="col-md-3 control-label">{{ paiPanRunDTO.paipanDTO.sex == 1 ? '男':'女' }}</span>
+            <span class="col-md-9 control-label"></span>
+          </div>
+        </strong>
       </div>
-
+      <div class="form-group ">
+        <strong>
+          <span class="col-md-1 control-label">出生地:</span>
+          <div class="col-md-4">
+            <span class="col-md-4 control-label">{{ paiPanRunDTO.paipanDTO.birthPlace.provinceName }}</span>
+            <span class="col-md-4 control-label">{{ paiPanRunDTO.paipanDTO.birthPlace.cityName }}</span>
+            <span class="col-md-4 control-label">{{ paiPanRunDTO.paipanDTO.birthPlace.areaName }}</span>
+          </div>
+        </strong>
+      </div>
     </form>
-    <p>消息：{{ paiPanDTO }}</p>
   </div>
 </template>
 
 <!-- 你的HTML代码 -->
 <script>
-  import PaiPanDTO from '../model/PaiPanDTO'
-
-  var paiPanDTO = new PaiPanDTO();
-
   export default {
-    name: 'EightCharPage',
+    name: 'EightCharResultPage',
     data() {
       return {
-        paiPanDTO: paiPanDTO,
+        paiPanRunDTO: this.$route.params.paiPanRunDTO,
         datePicker: {
           format: "YYYY-MM-DD HH:mm",
           confirm: true,
           clearable: false
         },
         timeBefore: false,
-        provinceList:[],
-        cityList:[],
-        areaList:[],
+        provinceList: [],
+        cityList: [],
+        areaList: [],
       }
     },
-    mounted:function(){
+    mounted: function () {
       this.selectRegionInfo()
     },
     methods: {
@@ -109,29 +65,18 @@
         this.$ajax.get('/regionInfo/select/' + value)
           .then(function (response) {
             console.log(response);
-            if (changeFor == "selProvince"){
+            if (changeFor == "selProvince") {
               that.provinceList = response.data.data
               that.cityList = []
               that.areaList = []
             }
-            if (changeFor == "selCity"){
+            if (changeFor == "selCity") {
               that.cityList = response.data.data
               that.areaList = []
             }
-            if (changeFor == "selArea"){
+            if (changeFor == "selArea") {
               that.areaList = response.data.data
             }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      },
-      paiPan:function (datas) {
-        this.$ajax.post('/paiPan/paiPan',
-          paiPanDTO
-        )
-          .then(function (response) {
-            console.log(response);
           })
           .catch(function (error) {
             console.log(error);

@@ -1,8 +1,22 @@
-class BirthPlaceDTO {
+export default class  BirthPlaceDTO {
+  constructor(){
+    //出生省份编码
+    this.province = ''
+    this.provinceName = ''
+    //出生市编码
+    this.city= ''
+    this.cityName = ''
+    //出生县或区编码
+    this.area= ''
+    this.areaName = ''
+  }
   //出生省份编码
-  province:string;
+  province;
+  provinceName;
   //出生市编码
-  city:string;
+  city;
+  cityName;
   //出生县或区编码
-  area:string;
+  area;
+  areaName;
 }
