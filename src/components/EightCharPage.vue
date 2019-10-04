@@ -37,7 +37,7 @@
         <span class="col-md-2 control-label" id="basic-addon4">出生地</span>
         <div class="col-md-4">
           <div class="col-md-4">
-            <select id="selProvince" changeFor="selCity" class="form-control"
+            <select id="selProvince" changeFor="selCity" class="form-control" ref="selProvince"
                     v-model="paiPanDTO.birthPlace.province"
                     @change="selectRegionInfo($event)">
               <option value="" selected>请选择省</option>
@@ -45,7 +45,7 @@
             </select>
           </div>
           <div class="col-md-4">
-            <select id="selCity" changeFor="selArea" class="form-control"
+            <select id="selCity" changeFor="selArea" class="form-control"  ref="selCity"
                     v-model="paiPanDTO.birthPlace.city"
                     @change="selectRegionInfo($event)">
               <option value="" selected>请选择市</option>
@@ -53,7 +53,7 @@
             </select>
           </div>
           <div class="col-md-4">
-            <select id="selArea" class="form-control" v-model="paiPanDTO.birthPlace.area">
+            <select id="selArea" class="form-control" v-model="paiPanDTO.birthPlace.area" ref="selArea">
               <option value="" selected>请选择区县</option>
               <option v-for="(x,i) of areaList" :value="x.criCode">{{x.criName}}</option>
             </select>
@@ -68,7 +68,7 @@
       </div>
 
     </form>
-    <p>消息：{{ paiPanDTO }}</p>
+    <!--<p>消息：{{ paiPanDTO }}</p>-->
   </div>
 </template>
 
@@ -96,6 +96,7 @@
     },
     mounted:function(){
       this.selectRegionInfo()
+      debugger
     },
     methods: {
       selectRegionInfo: function (e) {

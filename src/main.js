@@ -10,9 +10,17 @@ import '../node_modules/bootstrap/dist/js/bootstrap.min.js'
 
 import JDatePicker from 'vue-jlunar-datepicker';
 import DatePicker from 'vue2-datepicker'
+import $ from 'jquery'
+import fieldValidation from 'vue-bootstrap-validate'
+import verify from "vue-verify-plugin";
 
+
+Vue.component('field-validation', fieldValidation);
 Vue.component("j-date-picker",JDatePicker);
 Vue.component("date-picker",DatePicker);
+Vue.use(verify,{
+  blur:true
+});
 
 Vue.config.productionTip = false
 
