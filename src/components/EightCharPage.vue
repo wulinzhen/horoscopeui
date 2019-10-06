@@ -2,9 +2,9 @@
   <div class="container-fluid ">
     <form class="form-horizontal" role="form">
       <div class="form-group ">
-        <span class="col-md-2 control-label" id="basic-addon1">   姓名  </span>
+        <span class="col-md-2 control-label" id="basic-addon1">姓名</span>
         <div class="col-md-4">
-          <input class="form-control" type="text" placeholder="姓名" aria-describedby="basic-addon1"
+          <input  class="form-control" type="text" placeholder="姓名" aria-describedby="basic-addon1"
                  v-model="paiPanDTO.name">
         </div>
       </div>
@@ -18,6 +18,7 @@
           <label class="radio-inline">
             <input type="radio" value="2" name="sex" v-model="paiPanDTO.sex">女性
           </label>
+
         </div>
       </div>
 
@@ -74,7 +75,7 @@
 
 <!-- 你的HTML代码 -->
 <script>
-  import PaiPanDTO from '../model/PaiPanDTO'
+  import PaiPanDTO from '../model/PaiPanDTO';
 
   var paiPanDTO = new PaiPanDTO();
 
@@ -151,7 +152,7 @@
           .catch(function (error) {
             console.log(error);
           });
-      }
+      },
     },
     watch: {}
   }

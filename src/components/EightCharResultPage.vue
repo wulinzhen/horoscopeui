@@ -1,7 +1,10 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
   <div class="container-fluid">
     <div class="panel panel-default">
-      <div class="panel-body bg-warning">
+      <div class="panel-body">
+        <span class="glyphicon glyphicon-floppy-save pull-left" aria-hidden="true" v-on:click="downloadResult"></span>
+      </div>
+      <div class="panel-body bg-warning" ref="paiPanResult">
         <strong>
           <p class="text-left">姓名: {{ paiPanRunDTO.paipanDTO.name }}</p>
           <p class="text-left">性别: {{ paiPanRunDTO.paipanDTO.sex == 1 ? '男':'女' }}</p>
@@ -222,6 +225,7 @@
         </p>
       </div>
     </div>
+
     <div class="alert alert-success alert-dismissable hide">
       <button type="button" class="close" data-dismiss="alert"
                  aria-hidden="true">
@@ -234,6 +238,11 @@
 
 <!-- 你的HTML代码 -->
 <script>
+
+  import html2canvas from 'html2canvas';
+
+  import wxapi from '@/common/wxapi.js'
+
   export default {
     name: 'EightCharResultPage',
     data() {
@@ -248,11 +257,13 @@
         provinceList: [],
         cityList: [],
         areaList: [],
-        glyphiconUp:true
+        glyphiconUp:true,
+        dataURL:''
       }
     },
     mounted: function () {
       this.selectRegionInfo()
+      wxapi.wxRegister(this.wxRegCallback)
     },
     methods: {
       selectRegionInfo: function (e) {
@@ -288,7 +299,86 @@
           .catch(function (error) {
             console.log(error);
           });
-      }
+      },
+      paiPanJieTu:function () {
+        let self = this
+        let ref = this.$refs.paiPanResult // 截图区域
+        debugger
+        html2canvas(ref, {
+          backgroundColor: '#142E48'
+        }).then((canvas) => {
+          let dataURL = canvas.toDataURL("image/png")
+          console.log("dataURL.imgUrl........_>", dataURL.imgUrl)
+          debugger
+          self.dataURL = dataURL
+        })
+      },
+      wxRegCallback () {
+        // 用于微信JS-SDK回调
+        this.wxShareTimeline()
+        this.wxShareAppMessage()
+      },
+      wxShareTimeline () {
+        // 微信自定义分享到朋友圈
+        let option = {
+          title: '限时团购周 挑战最低价', // 分享标题, 请自行替换
+          link: window.location.href.split('#')[0], // 分享链接，根据自身项目决定是否需要split
+          imgUrl: 'logo.png', // 分享图标, 请自行替换，需要绝对路径
+          success: () => {
+            alert('分享成功')
+          },
+          error: () => {
+            alert('已取消分享')
+          }
+        }
+        // 将配置注入通用方法
+        wxapi.ShareTimeline(option)
+      },
+      wxShareAppMessage () {
+        // 微信自定义分享给朋友
+        let option = {
+          title: '限时团购周 挑战最低价', // 分享标题, 请自行替换
+          desc: '限时团购周 挑战最低价', // 分享描述, 请自行替换
+          link: window.location.href.split('#')[0], // 分享链接，根据自身项目决定是否需要split
+          imgUrl: 'logo.png', // 分享图标, 请自行替换，需要绝对路径
+          success: () => {
+            alert('分享成功')
+          },
+          error: () => {
+            alert('已取消分享')
+          }
+        }
+        // 将配置注入通用方法
+        wxapi.ShareAppMessage(option)
+      },
+      dataURLToBlob(dataurl) {//ie 图片转格式
+        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+          bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], {type: mime})
+      },
+      downloadResult() {
+        let canvasID = this.$refs.paiPanResult;
+        let that = this;
+        let a = document.createElement('a');
+        debugger
+        var jieTuName = that.paiPanRunDTO.paipanDTO.name +that. paiPanRunDTO.paipanDTO.trueSunbirthDateTime
+        html2canvas(canvasID).then(canvas => {
+          let dom = document.body.appendChild(canvas);
+          dom.style.display = "none";
+          a.style.display = "none";
+          document.body.removeChild(dom);
+          let blob = that.dataURLToBlob(dom.toDataURL("image/png"));
+          a.setAttribute("href", URL.createObjectURL(blob));
+          a.setAttribute("download", jieTuName+".png")
+          document.body.appendChild(a);
+          a.click();
+          URL.revokeObjectURL(blob);
+          document.body.removeChild(a);
+        });
+      },
     },
     watch: {}
   }

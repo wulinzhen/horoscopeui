@@ -13,6 +13,7 @@ import DatePicker from 'vue2-datepicker'
 import $ from 'jquery'
 import fieldValidation from 'vue-bootstrap-validate'
 import verify from "vue-verify-plugin";
+import html2canvas from 'html2canvas';
 
 
 Vue.component('field-validation', fieldValidation);
@@ -21,6 +22,7 @@ Vue.component("date-picker",DatePicker);
 Vue.use(verify,{
   blur:true
 });
+Vue.use(html2canvas)
 
 Vue.config.productionTip = false
 
