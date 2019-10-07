@@ -4,6 +4,7 @@
       <div class="panel-body">
         <span class="glyphicon glyphicon-floppy-save pull-left" aria-hidden="true" v-on:click="downloadResult"></span>
       </div>
+      <div class="clearfix"></div>
       <div class="panel-body bg-warning" ref="paiPanResult">
         <strong>
           <p class="text-left">姓名: {{ paiPanRunDTO.paipanDTO.name }}</p>
@@ -75,13 +76,13 @@
              </span>
           </span>
 
-          <span  class="col-md-1" style="display:-moz-inline-box; display:inline-block; width:80px;">
+          <span  class="col-md-1" style="margin-left: 0.3%;display:-moz-inline-box; display:inline-block; width:80px;">
              <span style="display:block;" v-for="(x,i) of paiPanRunDTO.eightCharacterDTO.monthBranchHevsGod">
                {{ paiPanRunDTO.eightCharacterDTO.monthBranchHevs[i] }}{{ x }}
              </span>
           </span>
 
-          <span  class="col-md-1" style="display:-moz-inline-box; display:inline-block; width:80px;">
+          <span  class="col-md-1" style="margin-left: 0.3%;display:-moz-inline-box; display:inline-block; width:80px;">
              <span style="display:block;" v-for="(x,i) of paiPanRunDTO.eightCharacterDTO.dayBranchHevsGod">
                {{ paiPanRunDTO.eightCharacterDTO.dayBranchHevs[i] }}{{ x }}
              </span>
@@ -113,19 +114,19 @@
              </span>
           </span>
 
-          <span  class="col-md-1" style="display:-moz-inline-box; display:inline-block; width:80px;">
+          <span  class="col-md-1" style="margin-left: 0.3%;display:-moz-inline-box; display:inline-block; width:80px;">
              <span style="display:block;" v-for="(x,i) of paiPanRunDTO.eightCharacterDTO.monthShenShas">
                {{ x }}
              </span>
           </span>
 
-          <span  class="col-md-1" style="display:-moz-inline-box; display:inline-block; width:80px;">
+          <span  class="col-md-1" style="margin-left: 0.3%;display:-moz-inline-box; display:inline-block; width:80px;">
              <span style="display:block;" v-for="(x,i) of paiPanRunDTO.eightCharacterDTO.dayShenShas">
                {{ x }}
              </span>
           </span>
 
-          <span  class="col-md-1" style="display:-moz-inline-box; display:inline-block; width:80px;">
+          <span  class="col-md-1" style="margin-left: 0.3%;display:-moz-inline-box; display:inline-block; width:80px;">
                <span style="display:block;" v-for="(x,i) of paiPanRunDTO.eightCharacterDTO.hourShenShas">
                  {{ x }}
              </span>
@@ -163,60 +164,60 @@
           <span class="col-md-1"
                 style="padding-left: 0px;padding-right: 0%;display:inline-block; width:60px;">流年:</span>
 
-          <span  class="col-md-1" style="margin-left: -2.55%;display:-moz-inline-box; display:inline-block; width:80px;">
+          <span  class="col-md-1" style="margin-left: -2%;display:-moz-inline-box; display:inline-block; width:80px;">
              <span style="display:block;" v-for="(x,i) of paiPanRunDTO.daYunDTOS[0].liuNian">
                {{ x }}
              </span>
           </span>
 
-          <span  class="col-md-1" style="margin-left: -3.5%;display:-moz-inline-box; display:inline-block; width:80px;">
+          <span  class="col-md-1" style="margin-left: -3%;display:-moz-inline-box; display:inline-block; width:80px;">
              <span style="display:block;" v-for="(x,i) of paiPanRunDTO.daYunDTOS[1].liuNian">
                {{ x }}
              </span>
           </span>
 
-          <span  class="col-md-1" style="margin-left: -3%;display:-moz-inline-box; display:inline-block; width:80px;">
+          <span  class="col-md-1" style="margin-left: -2.7%;display:-moz-inline-box; display:inline-block; width:80px;">
              <span style="display:block;" v-for="(x,i) of paiPanRunDTO.daYunDTOS[2].liuNian">
                {{ x }}
              </span>
           </span>
-          <span  class="col-md-1" style="margin-left: -2.8%;display:-moz-inline-box; display:inline-block; width:80px;">
+          <span  class="col-md-1" style="margin-left: -2.5%;display:-moz-inline-box; display:inline-block; width:80px;">
              <span style="display:block;" v-for="(x,i) of paiPanRunDTO.daYunDTOS[3].liuNian">
                {{ x }}
              </span>
           </span>
 
-          <span  class="col-md-1" style="margin-left: -3%;display:-moz-inline-box; display:inline-block; width:80px;">
+          <span  class="col-md-1" style="margin-left: -2.5%;display:-moz-inline-box; display:inline-block; width:80px;">
              <span style="display:block;" v-for="(x,i) of paiPanRunDTO.daYunDTOS[4].liuNian">
                {{ x }}
              </span>
           </span>
 
-          <span  class="col-md-1" style="margin-left: -2.8%;display:-moz-inline-box; display:inline-block; width:80px;">
+          <span  class="col-md-1" style="margin-left: -2.5%;display:-moz-inline-box; display:inline-block; width:80px;">
              <span style="display:block;" v-for="(x,i) of paiPanRunDTO.daYunDTOS[5].liuNian">
                {{ x }}
              </span>
           </span>
 
-          <span  class="col-md-1" style="margin-left: -3%;display:-moz-inline-box; display:inline-block; width:80px;">
+          <span  class="col-md-1" style="margin-left: -2.5%;display:-moz-inline-box; display:inline-block; width:80px;">
              <span style="display:block;" v-for="(x,i) of paiPanRunDTO.daYunDTOS[6].liuNian">
                {{ x }}
              </span>
           </span>
 
-          <span  class="col-md-1" style="margin-left: -3%;display:-moz-inline-box; display:inline-block; width:80px;">
+          <span  class="col-md-1" style="margin-left: -2.5%;display:-moz-inline-box; display:inline-block; width:80px;">
              <span style="display:block;" v-for="(x,i) of paiPanRunDTO.daYunDTOS[7].liuNian">
                {{ x }}
              </span>
           </span>
 
-          <span  class="col-md-1" style="margin-left: -2.8%;display:-moz-inline-box; display:inline-block; width:80px;">
+          <span  class="col-md-1" style="margin-left: -2.5%;display:-moz-inline-box; display:inline-block; width:80px;">
              <span style="display:block;" v-for="(x,i) of paiPanRunDTO.daYunDTOS[8].liuNian">
                {{ x }}
              </span>
           </span>
 
-          <span  class="col-md-1" style="margin-left: -3%;display:-moz-inline-box; display:inline-block; width:80px;">
+          <span  class="col-md-1" style="margin-left: -2.5%;display:-moz-inline-box; display:inline-block; width:80px;">
              <span style="display:block;" v-for="(x,i) of paiPanRunDTO.daYunDTOS[9].liuNian">
                {{ x }}
              </span>
